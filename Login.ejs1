@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Universal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="./stylesheets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="wrapper">
+  <div class="menuzone">
+    <div class="topMenu">
+      <ul>
+        <li class="first"><a class="current" href="#">Home</a></li>
+        <li><a href="index.ejs">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="contact_us.html">Contact Us</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+  <div id="header">
+    <div id="logo"></div>
+    <div id="menu2">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+  <div id="banner">
+    <h1>DIGITAL R50</h1>
+    <div class="features">
+      <ul>
+        <li>How it work? <br />
+          
+        <li>Features and Benefits<br />
+          
+        <li>Specifications<br />
+          
+      </ul>
+    </div>
+    <div class="readMore"><a href="#">ReadMore</a></div>
+  </div>
+<div>
+<center>
+	<div><form method="post"><b>
+	Username:<input type="text" value="admin"><br><b>
+	Password:<input type = "password"> 
+	<br><input type ="Submit" action=>
+	</form>
+	</div>
+	</center>
+</div>
+</body>
+</html>	
