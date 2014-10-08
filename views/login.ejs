@@ -137,16 +137,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="login-right">
 						<h3>REGISTERED CUSTOMERS</h3>
 						<p>If you have an account with us, please log in.</p>
-						<form>
+						<form method="POST" action="/userlogin">
 							<div>
-								<span>Email Address<label>*</label></span>
-								<input type="text"> 
+								<span>UserId<label>*</label></span>
+								<input type="text" name="userid"> 
 							</div>
 							<div>
 								<span>Password<label>*</label></span>
-								<input type="text"> 
+								<input type="password" name="pwd"> 
 							</div>
-							<a class="forgot" href="#">Forgot Your Password?</a>
+					<!--		<a class="forgot" href="#">Forgot Your Password?</a> -->
 							<input type="submit" value="Login" />
 						</form>
 					</div>

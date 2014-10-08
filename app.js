@@ -37,11 +37,13 @@ app.get('/', routes.index);
 //	res.send(msg);
 //});
 app.get('/Login',routes.login);
+app.get('/index',routes.index);
 app.get('/register',routes.register);
 app.get('/products',routes.products);
 app.get('/details',routes.details);
 app.get('/contact',routes.contact);
 app.post('/signup',routes.authenticate);
+app.post('/userlogin',routes.userlogin);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

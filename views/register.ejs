@@ -129,7 +129,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="wrap">
 					<h1>CREATE AN ACCOUNT</h1>
 					<div class="register-grids">
-						<form method="POST" action="signup"> 
+						<form method="POST" action="/signup"> 
 								<div class="register-top-grid">
 										<h3>PERSONAL INFORMATION</h3>
 										<div>
@@ -148,7 +148,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<h3>LOGIN INFORMATION</h3>
 										<div>
 											<span>Password<label>*</label></span>
-											<input type="text">
+											<input type="text" name="password">
 										</div>
 										
 										<div>
@@ -158,12 +158,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										
 										<div>
 											<span>First Name</span>
-											<input type="text" name="first name"> 
+											<input type="text" name="first_name"> 
 										</div>
 										
 										<div>
 											<span>Last Name</span>
-											<input type="text" name="last name"> 
+											<input type="text" name="last_name"> 
+										</div>
+										<div>
+											<span>Email</span>
+											<input type="text" name="email"> 
 										</div>
 										<div class="clear"> </div>
 								</div>
