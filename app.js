@@ -41,7 +41,7 @@ app.get('/index',routes.index);
 app.get('/register',routes.register);
 app.get('/products',routes.products);
 app.get('/details',routes.details);
-app.get('/contact',routes.contact);
+app.get('/contact',routes.contact);	
 app.post('/signup',routes.authenticate);
 app.post('/userlogin',routes.userlogin);
 

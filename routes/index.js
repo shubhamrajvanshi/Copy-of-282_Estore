@@ -11,7 +11,7 @@ var pool = mysql.createConnection({
 	port : 3306,
 	database : 'shubhamawsdb'	
 });
-
+pool.connect();
 var aws = require('aws-sdk');
 aws.config.region = 'us-east-1';
 aws.config.update({accessKeyId:'AKIAJYGXZCHYFVJIKF2Q' , 
@@ -33,19 +33,27 @@ exports.login = function(req, res){
 
 exports.userlogin = function(req, res){
 	var params = [req.param('userid'),req.param('pwd')];
-	pool.connect();
-	pool.query("select count(*) from userinfo where userid = ? and password = ?;",
-			params,function(err, rows, fields) {
-		if(err){
+	
+	pool.query("select * from userinfo where userid = ? and password = ?;",
+			params,function(err, rows,fields) {
+		if(err || rows.length==0 ){
 			console.log("user not found" + err);
 		res.render('login');}
+		else if(rows[0].isadmin==1)
+		{
+			console.log(rows[0].isadmin);
+			res.render("admin",{username: params[0]})
+		}
+		
 		else
-		{	//console.log(rows);
+		{	
+		//console.log(rows);
+			
 	//	    console.log(pool.config);
 			console.log(params[0]);
-		    
+			res.render('index',{username: params[0]});  
 		}
-		res.redirect('index',{username: params[0]});
+		
 	});
 	
  	
