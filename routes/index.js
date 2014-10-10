@@ -41,17 +41,20 @@ exports.userlogin = function(req, res){
 		res.render('login');}
 		else if(rows[0].isadmin==1)
 		{
+			req.session.user = params[0];
+			var user = req.session.user;
 			console.log(rows[0].isadmin);
-			res.render("admin",{username: params[0]})
+			res.render("admin",{username: user})
 		}
 		
 		else
 		{	
 		//console.log(rows);
-			
+			req.session.user = params[0];
 	//	    console.log(pool.config);
+			var user = req.session.user ;
 			console.log(params[0]);
-			res.render('index',{username: params[0]});  
+			res.render('index',{username: user});  
 		}
 		
 	});
@@ -72,12 +75,14 @@ exports.authenticate = function(req,res){
 			console.log("user creation failed" + err);
 		else
 			console.log(rows);
+		req.session.user = params[0];
+		var user = req.session.user;
+		console.log(user);
+		res.redirect('index',{username: user});
 	
 	});
 	
-		var user= req.param('username');
-	console.log(user);
-	res.redirect('index',{username: user});
+		
 };
 
 exports.contact = function(req,res){
