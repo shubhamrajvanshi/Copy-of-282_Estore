@@ -30,14 +30,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-//app.get('/user', function(req,res){
-//	
-//	var msg = ["<H1> Hi Shubham!!</H1>",
-//	"<b> Time to rock expres nodejs </b>"
-//		];
-//	res.send("hello you have reached users page from app");
-//	res.send(msg);
-//});
 app.get('/Login',routes.login);
 app.get('/index',routes.index);
 app.get('/register',routes.register);
@@ -46,6 +38,8 @@ app.get('/details',routes.details);
 app.get('/contact',routes.contact);	
 app.post('/signup',routes.authenticate);
 app.post('/userlogin',routes.userlogin);
+app.get('/logout', routes.logout);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

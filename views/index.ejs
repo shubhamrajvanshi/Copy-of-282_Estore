@@ -128,7 +128,7 @@
 							<li><a href="/login">Login</a><span> </span></li>
 							<li><a href="/register">Join</a></li>
 							<% } else { %>
-								<li><a href="#">Logout</a></li>					
+								<li><a href="/logout">Logout</a></li>					
 								<%}%>
 														
 							</ul>
@@ -163,13 +163,11 @@
 										<div class="row">
 											<div class="col1">
 											<div class="h_nav">
-											<h4>style zone original</h4>	
+											<h4>Phones</h4>	
 											<ul>
-														<li><a href="/products">men</a></li>
-														<li><a href="/products">women</a></li>
-														<li><a href="/products">accessories</a></li>
-														<li><a href="/products">kids</a></li>
-														<li><a href="/products">brands</a></li>
+											<% for (var i = 0; i<4; i++ ) {%>
+												<li><a href="#/details"><%= products[i]%></a></li>
+											<% } %>			
 													</ul>	
 											</div>	
 											</div>
@@ -265,7 +263,7 @@
 		<!----start-price-rage--->
 		<div class="wrap">
 			<div class="price-rage">
-				<h3>Weekly selection:</h3>
+			
 				<div id="slider-range">
 				</div>
 			</div>
@@ -304,6 +302,8 @@
 							<!---//End-rate---->
 							<!---caption-script---->
 							<!---//caption-script---->
+			<!-- start of for loop -->				
+			<% for (var i = 0; i<6; i++ ) {%>
 						<div onclick="location.href='/details';" class="product-grid fade">
 							<div class="product-grid-head">
 								<ul class="grid-social">
@@ -317,18 +317,15 @@
 								</div>
 							</div>
 							<div class="product-pic">
-								<a href="#"><img src="images/9-sports-racket2.jpg" title="product-name" /></a>
-								<p>
+								<a href="#"><img src="images/<%= productsimage[i]%>" title="product-name" /></a>
 								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
 							</div>
 							<div class="product-info">
 								<div class="product-info-cust">
-									<a href="/details">Details</a>
+									<a href="/details"><%= products[i]%></a>
 								</div>
 								<div class="product-info-price">
-									<a href="/details">&#163; 380</a>
+									<a href="/details">$ <%= productsprice[i]%></a>
 								</div>
 								<div class="clear"> </div>
 							</div>
@@ -336,166 +333,10 @@
 								<span> </span>
 							</div>
 						</div>
-						<div onclick="location.href='/details';"  class="product-grid fade">
-							<div class="product-grid-head">
-								<ul class="grid-social">
-									<li><a class="facebook" href="#"><span> </span></a></li>
-									<li><a class="twitter" href="#"><span> </span></a></li>
-									<li><a class="googlep" href="#"><span> </span></a></li>
-									<div class="clear"> </div>
-								</ul>
-								<div class="block">
-									<div class="starbox small ghosting"> </div> <span> (46)</span>
-								</div>
-							</div>
-							<div class="product-pic">
-								<a href="#"><img src="images/6-phone-HTC.jpg" title="product-name" /></a>
-								<p>
-								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
-							</div>
-							<div class="product-info">
-								<div class="product-info-cust">
-									<a href="/details">Details</a>
-								</div>
-								<div class="product-info-price">
-									<a href="/details">&#163; 375</a>
-								</div>
-								<div class="clear"> </div>
-							</div>
-							<div class="more-product-info">
-								<span> </span>
-							</div>
-						</div>
-						<div onclick="location.href='/details';"  class="product-grid fade last-grid">
-							<div class="product-grid-head">
-								<ul class="grid-social">
-									<li><a class="facebook" href="#"><span> </span></a></li>
-									<li><a class="twitter" href="#"><span> </span></a></li>
-									<li><a class="googlep" href="#"><span> </span></a></li>
-									<div class="clear"> </div>
-								</ul>
-								<div class="block">
-									<div class="starbox small ghosting"> </div> <span> (46)</span>
-								</div>
-							</div>
-							<div class="product-pic">
-								<a href="#"><img src="images/8-sports-racket.jpg" title="product-name" /></a>
-								<p>
-								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
-							</div>
-							<div class="product-info">
-								<div class="product-info-cust">
-									<a href="/details">Details</a>
-								</div>
-								<div class="product-info-price">
-									<a href="/details">&#163; 350</a>
-								</div>
-								<div class="clear"> </div>
-							</div>
-							<div class="more-product-info">
-								<span> </span>
-							</div>
-						</div>
-						<div onclick="location.href='/details';"  class="product-grid fade">
-							<div class="product-grid-head">
-								<ul class="grid-social">
-									<li><a class="facebook" href="#"><span> </span></a></li>
-									<li><a class="twitter" href="#"><span> </span></a></li>
-									<li><a class="googlep" href="#"><span> </span></a></li>
-									<div class="clear"> </div>
-								</ul>
-								<div class="block">
-									<div class="starbox small ghosting"> </div> <span> (46)</span>
-								</div>
-							</div>
-							<div class="product-pic">
-								<a href="#"><img src="images/10-sports-racket3.jpg" title="product-name" /></a>
-								<p>
-								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
-							</div>
-							<div class="product-info">
-								<div class="product-info-cust">
-									<a href="/details">Details</a>
-								</div>
-								<div class="product-info-price">
-									<a href="/details">&#163; 370</a>
-								</div>
-								<div class="clear"> </div>
-							</div>
-							<div class="more-product-info">
-								<span> </span>
-							</div>
-						</div>
-						<div onclick="location.href='/details';"  class="product-grid fade">
-							<div class="product-grid-head">
-								<ul class="grid-social">
-									<li><a class="facebook" href="#"><span> </span></a></li>
-									<li><a class="twitter" href="#"><span> </span></a></li>
-									<li><a class="googlep" href="#"><span> </span></a></li>
-									<div class="clear"> </div>
-								</ul>
-								<div class="block">
-									<div class="starbox small ghosting"> </div> <span> (46)</span>
-								</div>
-							</div>
-							<div class="product-pic">
-								<a href="#"><img src="images/7-phone-nexus.jpg" title="product-name" /></a>
-								<p>
-								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
-							</div>
-							<div class="product-info">
-								<div class="product-info-cust">
-									<a href="/details">Details</a>
-								</div>
-								<div class="product-info-price">
-									<a href="/details">&#163; 355</a>
-								</div>
-								<div class="clear"> </div>
-							</div>
-							<div class="more-product-info">
-								<span> </span>
-							</div>
-						</div>
-						<div onclick="location.href='/details';"  class="product-grid fade last-grid">
-							<div class="product-grid-head">
-								<ul class="grid-social">
-									<li><a class="facebook" href="#"><span> </span></a></li>
-									<li><a class="twitter" href="#"><span> </span></a></li>
-									<li><a class="googlep" href="#"><span> </span></a></li>
-									<div class="clear"> </div>
-								</ul>
-								<div class="block">
-									<div class="starbox small ghosting"> </div> <span> (46)</span>
-								</div>
-							</div>
-							<div class="product-pic">
-								<a href="#"><img src="images/4-phones-iphone.jpg" title="product-name" /></a>
-								<p>
-								
-								<span>Men's Firm-Ground Football Boot</span>
-								</p>
-							</div>
-							<div class="product-info">
-								<div class="product-info-cust">
-									<a href="/details">Details</a>
-								</div>
-								<div class="product-info-price">
-									<a href="/details">&#163; 390</a>
-								</div>
-								<div class="clear"> </div>
-							</div>
-							<div class="more-product-info">
-								<span> </span>
-							</div>
-						</div>
+						<% } %>
+		<!--	} end of for loop -->			
+						
+						
 						<div class="clear"> </div>
 					</div>
 				</div>

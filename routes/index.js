@@ -13,7 +13,7 @@ var pool = mysql.createConnection({
 });
 pool.connect();
 var aws = require('aws-sdk');
-aws.config.region = 'us-east-1';
+aws.config.region = 'us-west-1';
 aws.config.update({accessKeyId:'AKIAJYGXZCHYFVJIKF2Q' , 
 	               secretAccessKey:'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'});
 
@@ -22,7 +22,42 @@ var dynamodb = new aws.DynamoDB({apiVersion: '2012-08-10'});
 
 
 exports.index = function(req, res){
-  res.render('index');
+ 
+ get_all_products(function(data){
+	 
+	 var images = [];//new Array(data["Count"]);
+	 var prices = [];
+	 var products = [];
+	 var categories = []
+//	 get_all_categories(function (data1){
+//		 for (var i=0; i< data["Count"]; i++)
+//			 {
+//			 categories[i] = data1["Items"].category;
+//			 }
+//		 
+//		 for (var i=0; i < data["Count"];i++ )
+//		 {
+//		 images[i] = data["Items"][i].image.S ;
+//		 prices[i] = data["Items"][i].price.S ;
+//		 products[i] = data["Items"][i].product.S ;
+//		 }
+//		 console.log( "Categories are" + categories );
+//	 });
+	 for (var i=0; i < data["Count"];i++ )
+	 {
+	 images[i] = data["Items"][i].image.S ;
+	 prices[i] = data["Items"][i].price.S ;
+	 products[i] = data["Items"][i].product.S ;
+	 }
+	 	 
+	 console.log(images);
+	 //req.session.products=images
+	res.render('index',{productsimage:images,products:products,productsprice:prices});
+ });
+  
+  
+  
+  //res.render('index');
 };
 
 
@@ -44,7 +79,7 @@ exports.userlogin = function(req, res){
 			req.session.user = params[0];
 			var user = req.session.user;
 			console.log(rows[0].isadmin);
-			res.render("admin",{username: user})
+			res.render("admin",{username: user });
 		}
 		
 		else
@@ -54,7 +89,24 @@ exports.userlogin = function(req, res){
 	//	    console.log(pool.config);
 			var user = req.session.user ;
 			console.log(params[0]);
-			res.render('index',{username: user});  
+			get_all_products(function(data){
+				 
+				 var images = [];//new Array(data["Count"]);
+				 var prices = [];
+				 var products = [];
+				 var categories = [];	 
+				 for (var i=0; i < data["Count"];i++ )
+				 {
+				 images[i] = data["Items"][i].image.S ;
+				 prices[i] = data["Items"][i].price.S ;
+				 products[i] = data["Items"][i].product.S ;
+				 }
+		 
+				 console.log(images);
+				 //req.session.products=images
+				res.render('index',{productsimage:images,products:products,productsprice:prices,username:user});
+			 });
+		//	res.render('index',{username: user});  
 		}
 		
 	});
@@ -68,18 +120,34 @@ exports.register = function(req,res){
 
 exports.authenticate = function(req,res){
 	var params = [req.param('username'),req.param('password'),req.param('first_name'),req.param('last_name'),req.param('email')];
-	pool.connect();
+//	pool.connect();
 	pool.query("insert into userinfo(userid,password,fname,lname,emailid) values (?,?,?,?,?);",
 			params,function(err, rows, fields) {
 		if(err)
 			console.log("user creation failed" + err);
 		else
-			console.log(rows);
+		{console.log(rows);
 		req.session.user = params[0];
 		var user = req.session.user;
 		console.log(user);
-		res.redirect('index',{username: user});
-	
+		get_all_products(function(data){
+			 
+			 var images = [];//new Array(data["Count"]);
+			 var prices = [];
+			 var products = [];
+			 var categories = [];	 
+			 for (var i=0; i < data["Count"];i++ )
+			 {
+			 images[i] = data["Items"][i].image.S ;
+			 prices[i] = data["Items"][i].price.S ;
+			 products[i] = data["Items"][i].product.S ;
+			 }
+	 
+			 console.log(images);
+			 //req.session.products=images
+			res.render('index',{productsimage:images,products:products,productsprice:prices,username:user});
+		 });
+		} // close of else
 	});
 	
 		
@@ -96,4 +164,78 @@ exports.details = function(req,res){
 exports.products = function(req,res){
 	res.render('products');
 };
+
+exports.logout = function(req,res){
+	req.session.user = null ;
+	get_all_products(function(data){
+		 
+		 var images = [];//new Array(data["Count"]);
+		 var prices = [];
+		 var products = [];
+		 var categories = []
+
+		 for (var i=0; i < data["Count"];i++ )
+		 {
+		 images[i] = data["Items"][i].image.S ;
+		 prices[i] = data["Items"][i].price.S ;
+		 products[i] = data["Items"][i].product.S ;
+		 }
+		 
+		 
+		 
+		 console.log(images);
+		 //req.session.products=images
+		res.render('index',{productsimage:images,products:products,productsprice:prices});
+	 });
+};
+
+
+function get_all_products(callback) {
+	
+	var params = {
+			
+		    "TableName" : 'catalog',
+		    "Limit"     : 10,
+		    "Select": 'ALL_ATTRIBUTES',
+		    "ScanFilter": {
+		        "category": {
+		          ComparisonOperator: 'NOT_NULL'}},
+		  }
+	
+	
+	dynamodb.scan(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack); // an error occurred
+            callback(err);
+        } else {
+        	//console.log(data);
+        	callback(data);
+	
+        }
+	});
+	
+};
+
+function get_all_categories(callback) {
+	
+	var params = {
+			"TableName" : 'category',
+		    "Limit"     : 10,
+		    "Select": 'ALL_ATTRIBUTES',
+		      }
+		
+	dynamodb.scan(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack); // an error occurred
+            callback(err);
+        } else {
+        //	console.log(data);
+        	callback(data);
+	
+        }
+	});
+	
+}
+
+
 
