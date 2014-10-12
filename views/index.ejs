@@ -317,15 +317,14 @@
 								</div>
 							</div>
 							<div class="product-pic">
-								<a href="#"><img src="images/<%= productsimage[i]%>" title="product-name" /></a>
-								
+								<a href="/details/<%= productid[i]%>"><img src="images/<%= productsimage[i]%>" title="product-name" /></a>
 							</div>
 							<div class="product-info">
 								<div class="product-info-cust">
-									<a href="/details"><%= products[i]%></a>
+									<a href="/details/<%= products[i]%>"><%= products[i]%></a>
 								</div>
 								<div class="product-info-price">
-									<a href="/details">$ <%= productsprice[i]%></a>
+									<a href="/details/<%= productid[i]%>">$ <%= productsprice[i]%></a>
 								</div>
 								<div class="clear"> </div>
 							</div>

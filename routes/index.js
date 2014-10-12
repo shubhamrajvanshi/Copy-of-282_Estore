@@ -28,7 +28,8 @@ exports.index = function(req, res){
 	 var images = [];//new Array(data["Count"]);
 	 var prices = [];
 	 var products = [];
-	 var categories = []
+	 var categories = [];
+	 var productid = [];
 //	 get_all_categories(function (data1){
 //		 for (var i=0; i< data["Count"]; i++)
 //			 {
@@ -45,14 +46,15 @@ exports.index = function(req, res){
 //	 });
 	 for (var i=0; i < data["Count"];i++ )
 	 {
+	 productid[i] = data["Items"][i].id.S;
 	 images[i] = data["Items"][i].image.S ;
 	 prices[i] = data["Items"][i].price.S ;
 	 products[i] = data["Items"][i].product.S ;
+	
 	 }
-	 	 
-	 console.log(images);
+	 
 	 //req.session.products=images
-	res.render('index',{productsimage:images,products:products,productsprice:prices});
+	res.render('index',{productsimage:images,products:products,productsprice:prices,productid:productid});
  });
   
   
@@ -158,7 +160,49 @@ exports.contact = function(req,res){
 };
 
 exports.details = function(req,res){
-	res.render('details');
+	get_all_products(function(data){
+		 var prod_id = req.params.prod_id;
+		 var images = [];//new Array(data["Count"]);
+		 var prices = [];
+		 var products = [];
+		 var categories = [];
+		 var productid = [];
+         var idimage, idproduct,idprice,idquantity,iddetails ;
+		 for (var i=0; i < data["Count"];i++ )
+		 {
+		 images[i] = data["Items"][i].image.S ;
+		 prices[i] = data["Items"][i].price.S ;
+		 products[i] = data["Items"][i].product.S ;
+		 productid[i] = data["Items"][i].id.S;
+		 }
+		 
+		 var params = {
+				    TableName : 'catalog',
+				    Key : { 
+				      "id" : { "S" : prod_id},
+				    	}
+				};
+				
+			dynamodb.getItem(params, function(err, data) {
+				if (err) {
+					console.log(err);
+				//	res.render('index'});
+					} 
+				    else {
+				    	console.log(data);
+				      idimage = data["Item"].image.S;
+				      idquantity = data["Item"].quantity.S;
+				      idproduct = data["Item"].product.S;
+				      iddetails = data["Item"].details.S;
+				      idprice = data["Item"].price.S;
+				      console.log("Product is" +idproduct);
+				      res.render('details',{productsimage:images,products:products,productsprice:prices,idproduct:idproduct,idimage:idimage,idprice:idprice,idquantity:idquantity,iddetails:iddetails});
+				      	}
+				  });
+			 
+		 		
+	 });
+//	res.render('details');
 };
 
 exports.products = function(req,res){
@@ -172,7 +216,7 @@ exports.logout = function(req,res){
 		 var images = [];//new Array(data["Count"]);
 		 var prices = [];
 		 var products = [];
-		 var categories = []
+		 var categories = [];
 
 		 for (var i=0; i < data["Count"];i++ )
 		 {
@@ -235,7 +279,33 @@ function get_all_categories(callback) {
         }
 	});
 	
-}
+};
+
+function get_product(callback) {
+	
+	var params = {
+			
+		    "TableName" : 'catalog',
+		    "Limit"     : 10,
+		    "Select": 'ALL_ATTRIBUTES',
+		    "ScanFilter": {
+		        "category": {
+		          ComparisonOperator: 'NOT_NULL'}},
+		  }
+	
+	
+	dynamodb.scan(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack); // an error occurred
+            callback(err);
+        } else {
+        	//console.log(data);
+        	callback(data);
+	
+        }
+	});
+	
+};
 
 
 
