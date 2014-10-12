@@ -97,16 +97,18 @@ exports.userlogin = function(req, res){
 				 var prices = [];
 				 var products = [];
 				 var categories = [];	 
+				 var productid = [];
 				 for (var i=0; i < data["Count"];i++ )
 				 {
 				 images[i] = data["Items"][i].image.S ;
+				 productid[i] = data["Items"][i].id.S;
 				 prices[i] = data["Items"][i].price.S ;
 				 products[i] = data["Items"][i].product.S ;
 				 }
 		 
 				 console.log(images);
 				 //req.session.products=images
-				res.render('index',{productsimage:images,products:products,productsprice:prices,username:user});
+				res.render('index',{productsimage:images,products:products,productsprice:prices,username:user,productid:productid});
 			 });
 		//	res.render('index',{username: user});  
 		}
@@ -137,17 +139,19 @@ exports.authenticate = function(req,res){
 			 var images = [];//new Array(data["Count"]);
 			 var prices = [];
 			 var products = [];
+			 var productid = [];
 			 var categories = [];	 
 			 for (var i=0; i < data["Count"];i++ )
 			 {
 			 images[i] = data["Items"][i].image.S ;
+			 productid[i] = data["Items"][i].id.S;
 			 prices[i] = data["Items"][i].price.S ;
 			 products[i] = data["Items"][i].product.S ;
 			 }
 	 
 			 console.log(images);
 			 //req.session.products=images
-			res.render('index',{productsimage:images,products:products,productsprice:prices,username:user});
+			res.render('index',{productsimage:images,products:products,productsprice:prices,username:user,productid:productid});
 		 });
 		} // close of else
 	});
@@ -162,6 +166,7 @@ exports.contact = function(req,res){
 exports.details = function(req,res){
 	get_all_products(function(data){
 		 var prod_id = req.params.prod_id;
+		 var user = req.session.user ;
 		 var images = [];//new Array(data["Count"]);
 		 var prices = [];
 		 var products = [];
@@ -196,7 +201,7 @@ exports.details = function(req,res){
 				      iddetails = data["Item"].details.S;
 				      idprice = data["Item"].price.S;
 				      console.log("Product is" +idproduct);
-				      res.render('details',{productsimage:images,products:products,productsprice:prices,idproduct:idproduct,idimage:idimage,idprice:idprice,idquantity:idquantity,iddetails:iddetails});
+				      res.render('details',{username:user,productsimage:images,products:products,productsprice:prices,idproduct:idproduct,idimage:idimage,idprice:idprice,idquantity:idquantity,iddetails:iddetails});
 				      	}
 				  });
 			 
@@ -217,10 +222,11 @@ exports.logout = function(req,res){
 		 var prices = [];
 		 var products = [];
 		 var categories = [];
-
+		 var productid = [];
 		 for (var i=0; i < data["Count"];i++ )
 		 {
 		 images[i] = data["Items"][i].image.S ;
+		 productid[i] = data["Items"][i].id.S;
 		 prices[i] = data["Items"][i].price.S ;
 		 products[i] = data["Items"][i].product.S ;
 		 }
@@ -229,7 +235,7 @@ exports.logout = function(req,res){
 		 
 		 console.log(images);
 		 //req.session.products=images
-		res.render('index',{productsimage:images,products:products,productsprice:prices});
+		res.render('index',{productsimage:images,products:products,productsprice:prices,productid:productid});
 	 });
 };
 
@@ -281,31 +287,6 @@ function get_all_categories(callback) {
 	
 };
 
-function get_product(callback) {
-	
-	var params = {
-			
-		    "TableName" : 'catalog',
-		    "Limit"     : 10,
-		    "Select": 'ALL_ATTRIBUTES',
-		    "ScanFilter": {
-		        "category": {
-		          ComparisonOperator: 'NOT_NULL'}},
-		  }
-	
-	
-	dynamodb.scan(params, function(err, data) {
-        if (err) {
-            console.log(err, err.stack); // an error occurred
-            callback(err);
-        } else {
-        	//console.log(data);
-        	callback(data);
-	
-        }
-	});
-	
-};
 
 
 

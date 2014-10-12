@@ -124,7 +124,7 @@
 						</div>
 						<div class="top-header-right">
 							<ul>
-							<% if (typeof username== 'undefined') {%> 
+							<% if (typeof username== 'undefined' || username==null) {%> 
 							<li><a href="/login">Login</a><span> </span></li>
 							<li><a href="/register">Join</a></li>
 							<% } else { %>
