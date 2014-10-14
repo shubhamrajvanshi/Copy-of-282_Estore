@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Spike shoes Website Template | Home :: w3layouts</title>
+		<title>CMPE282 Ecommerce Website | Creator Shubham</title>
 		<link href="../css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -282,16 +282,20 @@
 								<li class="stock"><i>In stock</i></li>
 								<div class="clear"> </div>
 							</ul>
+							<form method="POST" action="/addtocart">
+							<input type="hidden" value=<%=idproductid%> name ="id">
+							<input type="hidden" value=<%=idproduct%> name ="product">
+							<input type="hidden" value=<%=idprice%> name ="price">
 							<ul class="prosuct-qty">
 								<span>Quantity:</span>
-								<select>
+								<select name="quatityselected">
 								<%for (var i = 1; i <= parseInt(idquantity);i++) {%>
 									<option><%=i%></option>
 								<%}%>
 								</select>
 							</ul>
-							<input type="button" value="add to cart" />
-							
+							<input type="submit" value="add to cart"  />
+							</form>
 						</div>
 					</div>
 					</div>

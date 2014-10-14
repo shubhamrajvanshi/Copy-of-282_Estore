@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Spike shoes Website Template | Home :: w3layouts</title>
+		<title>CMPE282 Ecommerce Website | Creator Shubham </title>
 		<link href="./css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -166,7 +166,7 @@
 											<h4>Phones</h4>	
 											<ul>
 											<% for (var i = 0; i<4; i++ ) {%>
-												<li><a href="#/details"><%= products[i]%></a></li>
+												<li><a href="#/details/<%= products[i]%>"><%= products[i]%></a></li>
 											<% } %>			
 													</ul>	
 											</div>	
@@ -232,7 +232,7 @@
 			    <div class="slider-detils">
 			    	<h3>MENS FOOT BALL <label>BOOTS</label></h3>
 			    	<span>Stay true to your team all day, every day, game day.</span>
-			    	<a class="slide-btn" href="/details"> Shop Now</a>
+			    	<a class="slide-btn" href="/details/<%= products[i]%>"> Shop Now</a>
 			    </div>
 			  </li>
 			  <li>
@@ -242,7 +242,7 @@
 			     <div class="slider-detils">
 			    	<h3>MENS FOOT BALL <label>BOOTS</label></h3>
 			    	<span>Stay true to your team all day, every day, game day.</span>
-			    	<a class="slide-btn" href="/details"> Shop Now</a>
+			    	<a class="slide-btn" href="/details/<%= products[i]%>"> Shop Now</a>
 			    </div>
 			  </li>
 			  <li>
@@ -252,7 +252,7 @@
 			     <div class="slider-detils">
 			    	<h3>MENS FOOT BALL <label>BOOTS</label></h3>
 			    	<span>Stay true to your team all day, every day, game day.</span>
-			    	<a class="slide-btn" href="/details"> Shop Now</a>
+			    	<a class="slide-btn" href="/details/<%= products[i]%>"> Shop Now</a>
 			    </div>
 			  </li>
 			</ul>
@@ -304,7 +304,7 @@
 							<!---//caption-script---->
 			<!-- start of for loop -->				
 			<% for (var i = 0; i<6; i++ ) {%>
-						<div onclick="location.href='/details';" class="product-grid fade">
+						<div onclick="location.href='/details/<%= productid[i]%>';" class="product-grid fade">
 							<div class="product-grid-head">
 								<ul class="grid-social">
 									<li><a class="facebook" href="#"><span> </span></a></li>
@@ -321,7 +321,7 @@
 							</div>
 							<div class="product-info">
 								<div class="product-info-cust">
-									<a href="/details/<%= products[i]%>"><%= products[i]%></a>
+									<a href="/details/<%= productid[i]%>"><%= products[i]%></a>
 								</div>
 								<div class="product-info-price">
 									<a href="/details/<%= productid[i]%>">$ <%= productsprice[i]%></a>

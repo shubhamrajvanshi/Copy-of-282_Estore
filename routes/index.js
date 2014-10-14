@@ -201,7 +201,7 @@ exports.details = function(req,res){
 				      iddetails = data["Item"].details.S;
 				      idprice = data["Item"].price.S;
 				      console.log("Product is" +idproduct);
-				      res.render('details',{username:user,productsimage:images,products:products,productsprice:prices,idproduct:idproduct,idimage:idimage,idprice:idprice,idquantity:idquantity,iddetails:iddetails});
+				      res.render('details',{username:user,productsimage:images,products:products,productsprice:prices,idproduct:idproduct,idimage:idimage,idprice:idprice,idquantity:idquantity,iddetails:iddetails,idproductid:prod_id});
 				      	}
 				  });
 			 
@@ -239,7 +239,15 @@ exports.logout = function(req,res){
 	 });
 };
 
-
+exports.addtocart = function(req,res){
+	var params = [req.param('id'),req.param('product'),req.param('price'),req.param('quatityselected')];
+	var product=params[1];
+	var price =params[2];
+	var quantity = params[3];
+	console.log("inside addtocart");
+	console.log(params);
+	res.render('cart',{product:product,price:price,quantity:quantity});
+};
 function get_all_products(callback) {
 	
 	var params = {
@@ -286,6 +294,7 @@ function get_all_categories(callback) {
 	});
 	
 };
+
 
 
 

@@ -39,6 +39,7 @@ app.get('/contact',routes.contact);
 app.post('/signup',routes.authenticate);
 app.post('/userlogin',routes.userlogin);
 app.get('/logout', routes.logout);
+app.post('/addtocart',routes.addtocart);
 
 
 http.createServer(app).listen(app.get('port'), function(){

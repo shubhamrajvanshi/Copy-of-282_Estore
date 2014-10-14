@@ -142,9 +142,15 @@
 						<div class="mid-grid-left">
 							<form>
 								<% if (typeof username!= 'undefined') {%>
-							Welcome admin	<%=username%>				
+								<%=username%>		
+										
 								<%}%>
+							
 							</form>
+							<br>
+								Items in the cart are:<br>
+								Product| Price  | Quantity<br>
+									<%=product%>|	<%=price%>| 	<%=quantity%>
 						</div>
 						<div class="mid-grid-right">
 							<a class="logo" href="index.html"><span> </span></a>
