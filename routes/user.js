@@ -10,8 +10,8 @@ var mysqlconnection = mysql.createConnection({
 
 var aws = require('aws-sdk');
 aws.config.region = 'us-east-1';
-aws.config.update({accessKeyId:'AKIAJYGXZCHYFVJIKF2Q' , 
-	               secretAccessKey:'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'});
+aws.config.update({accessKeyId:'#######################' , 
+	               secretAccessKey:'##############################'});
 
 var dynamodb = new aws.DynamoDB({apiVersion: '2012-08-10'});
 
